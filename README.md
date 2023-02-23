@@ -1,4 +1,3 @@
-#EventWebpage 
+# EventWebpage 
 
-##Anton Yemortaji
-& Linda Jabelin
+## Anton Yemortaji & Linda Jabelin
