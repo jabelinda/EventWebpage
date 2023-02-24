@@ -1,3 +1,43 @@
 h1{
-    color:darkred;
+    color: #444444;
+    padding-left: 100px;
+}
+*{
+    box-sizing: border-box;
+}
+
+html, body{
+    overflow-y: hidden;
+    height: 100vh;
+    margin: 0px;
+}
+
+html{
+    display: block;
+    overflow-x: visible;
+}
+
+body{
+    width: auto;
+    display: inline-block;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.page{
+    display: flex;
+    width: 2000px;
+}
+
+.site-header{
+    position: fixed;
+    max-width: 100px;
+    left: 0;
+}
+.container{
+    background-position: left;
+    left: 0;
+    width: auto;
+    height: 100vh;
+    background-color: darkgrey;
 }
