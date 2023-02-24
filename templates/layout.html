@@ -21,10 +21,19 @@
                     <img src="{{ url_for('static', filename='images/whatsup-vertical.png') }}" alt="Logo" width="80" class="logo"/>
                 </div>
             </a>
+            <div class="header-menu">
+                <a class="footer-link" href="#end">
+                    <img src="{{ url_for('static', filename='images/header-menu-img.png') }}" alt="Menu" width="80" class="menu-img">
+                </a>
+            </div>
         </header>
+        <div class="container" id="start">
+            {% block content %} {% endblock content %}
+        </div>
 
-        {% block content %} {% endblock content %}
-
+        <footer id="end">
+            <a class="start-link" href="#start">Start</a>
+        </footer>
     </div>
 </body>
 </html>
