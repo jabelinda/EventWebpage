@@ -2,14 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}"/>
+
     {% if title %}
-      <title>{{ company_name }} - {{ title }}</title>
+      <title>Whats Up - {{ title }}</title>
     {% else %}
       <title>Event Webpage</title>
     {% endif %}
+
 </head>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 <body>
-    {% block content %}{% endblock content %}
+    <div class="rotater">
+        <div class="rotater2">
+
+            <header class="site-header">
+                <nav class="navbar">
+                    <div class="header-logo">
+                        <a class="home-link" href="/">
+                             <img src="{{ url_for('static', filename='images/whatsup-vertical.png') }}" alt="Logo" width="80" class="logo"/>
+                        </a>
+                    </div>
+                </nav>
+            </header>
+
+        {% block content %} {% endblock content %}
+        </div>
+    </div>
 </body>
 </html>
