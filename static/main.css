@@ -31,13 +31,28 @@ body{
 
 .site-header{
     position: fixed;
-    max-width: 100px;
     left: 0;
+    max-width: 100px;
+    height: auto;
 }
+
+.header-menu, .footer-link{
+    height: 80px;
+}
+a{
+    position: relative;
+    top: -4px;
+}
+
 .container{
     background-position: left;
     left: 0;
     width: auto;
     height: 100vh;
     background-color: darkgrey;
+}
+
+footer{
+    position: absolute;
+    right: 0;
 }
