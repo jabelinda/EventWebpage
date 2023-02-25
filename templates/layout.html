@@ -27,11 +27,16 @@
                 </a>
             </div>
         </header>
+        <main>
         <div class="container" id="start">
             {% block content %} {% endblock content %}
         </div>
+        <div class="container">
+        </div>
+        </main>
 
         <footer id="end">
+            <img src="{{ url_for('static', filename='images/footer-background.png') }}" alt="Footer background" width="80" class="footer-background-img">
             <a class="start-link" href="#start">Start</a>
         </footer>
     </div>

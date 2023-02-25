@@ -26,7 +26,7 @@ body{
 
 .page{
     display: flex;
-    width: 2000px;
+    min-width: 200vw;
 }
 
 .site-header{
@@ -39,20 +39,28 @@ body{
 .header-menu, .footer-link{
     height: 80px;
 }
-a{
-    position: relative;
-    top: -4px;
+
+main{
+    display: flex;
 }
 
 .container{
-    background-position: left;
-    left: 0;
-    width: auto;
+    width: 600px;
     height: 100vh;
     background-color: darkgrey;
 }
 
-footer{
+footer, .footer-background-img{
+    display: grid;
     position: absolute;
     right: 0;
+    width: 100vw;
+}
+
+.footer-background-img{
+    height: 100vh;
+}
+
+.start-link{
+    position: relative;
 }
