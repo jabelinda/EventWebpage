@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="height=device-height, initial-scale=1">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}"/>
 
     {% if title %}
@@ -15,6 +17,7 @@
 </head>
 <body>
     <div class="page">
+
         <header class="site-header">
             <a class="home-link" href="/">
                 <div class="header-logo">
@@ -27,13 +30,51 @@
                 </a>
             </div>
         </header>
-        <div class="container" id="start">
-            {% block content %} {% endblock content %}
-        </div>
+
+        <main>
+            <div class="container" id="start">
+                {% block content %} {% endblock content %}
+            </div>
+            <div class="container">
+            </div>
+        </main>
 
         <footer id="end">
-            <a class="start-link" href="#start">Start</a>
+            <img src="{{ url_for('static', filename='images/footer-background.png') }}" alt="Colorful Background" width="80" class="footer-background-img">
+
+            <div class="start-anchor">
+               <a class="start-link" href="#start">
+                   <img src="{{ url_for('static', filename='images/footer-start-img.png') }}" alt="To Start" width="80" class="footer-start-img">
+               </a>
+            </div>
+            <div class="footer-content">
+                <div class="footer-link-container">
+                    <div class="nav-list">
+                        <a class="about-link" href="#">About WhatsUp!</a>
+                        <a class="calendar-link" href="#">Calendar</a>
+                        <a class="categories-link" href="#">Categories</a>
+                        <a class="profile-link" href="#">My Profile</a>
+                        <a class="add-event-link" href="#">Add a new Event</a>
+                    </div>
+                </div>
+                <div class="contact-info-container">
+                    <div class="contact-info-list">
+                        <img src="{{ url_for('static', filename='images/whatsup-horisontal.png') }}" alt="Logo" height="60" class="horisontal-logo"/>
+                        <p>Strandvägen 100</p>
+                        <p>1000 Huvudstaden</p>
+                        <p>+4510101010</p>
+                        <P>info@whatsup.com</P>
+                    </div>
+                    <div class="socialmedia-container">
+                        <img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Facebook Logo" height="25" class="facebook"/>
+                        <img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram Logo" height="25" class="instagram"/>
+                        <img src="{{ url_for('static', filename='images/snapchat.png') }}" alt="Snapchat Logo" height="25" class="snapchat"/>
+                        <img src="{{ url_for('static', filename='images/twitter.png') }}" alt="Twitter Logo" height="25" class="twitter"/>
+                    </div>
+                </div>
+            </div>
         </footer>
+
     </div>
 </body>
 </html>

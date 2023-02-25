@@ -4,11 +4,15 @@ h1{
 }
 *{
     box-sizing: border-box;
-}
+    font-family: 'Six Caps', sans-serif;
+    font-weight: bolder;
+    font-size: xx-large;
+    }
 
 html, body{
     overflow-y: hidden;
     height: 100vh;
+    width: 100%;
     margin: 0px;
 }
 
@@ -26,10 +30,12 @@ body{
 
 .page{
     display: flex;
-    width: 2000px;
+    width: 100%;
+    min-width: 200vw;
 }
 
 .site-header{
+    z-index: 4;
     position: fixed;
     left: 0;
     max-width: 100px;
@@ -39,20 +45,107 @@ body{
 .header-menu, .footer-link{
     height: 80px;
 }
-a{
-    position: relative;
-    top: -4px;
+
+main{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    padding-right: 100vw;
 }
 
 .container{
-    background-position: left;
-    left: 0;
-    width: auto;
+    width: 600px;
     height: 100vh;
     background-color: darkgrey;
+    opacity: 0.3;
 }
 
 footer{
+    display: flex;
+    flex-direction: column;
+}
+
+footer, .footer-background-img{
     position: absolute;
     right: 0;
+    width: 100vw;
+    overflow: visible;
 }
+
+.footer-background-img{
+    z-index: -4;
+    height: 100vh;
+}
+
+.start-anchor{
+    height: auto;
+    text-align: right;
+}
+
+.start-link{
+    position: relative;
+    margin: 40px;
+
+}
+
+.footer-start-img{
+    margin-top: 40px;
+}
+
+.footer-content{
+    position: relative;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.footer-link-container{
+    margin-bottom: 100px;
+    height: 100%;
+}
+.nav-list, .contact-info-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.nav-list a{
+    text-decoration: none;
+    display: block;
+    margin-block-start: 20%;
+    margin-block-end: 20%;
+    font-size: larger;
+    background-color: black;
+    color: white;
+    max-width: fit-content;
+    opacity: 0.9;
+}
+
+p{
+    margin-block-start: 1%;
+    margin-block-end: 1%;
+    margin-left: 20px;
+}
+
+.horisontal-logo{
+    margin-top: 40%;
+    margin-bottom: 10%;
+    opacity: 0.9;
+}
+
+.page-name{
+    margin-block-start: 50%;
+    margin-block-end: 150%;
+    background-color: black;
+    color: white;
+    max-width: fit-content;
+    opacity: 0.9;
+}
+
+.socialmedia-container{
+    margin-top: 20px;
+    margin-left: 20px;
+    opacity: 0.9;
+}
+
+
