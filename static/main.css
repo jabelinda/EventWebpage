@@ -118,16 +118,19 @@ footer, .footer-background-img{
     background-color: black;
     color: white;
     max-width: fit-content;
+    opacity: 0.9;
 }
 
 p{
     margin-block-start: 1%;
     margin-block-end: 1%;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 .horisontal-logo{
     margin-top: 40%;
+    margin-bottom: 10%;
+    opacity: 0.9;
 }
 
 .page-name{
