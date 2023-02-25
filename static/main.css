@@ -139,6 +139,13 @@ p{
     background-color: black;
     color: white;
     max-width: fit-content;
+    opacity: 0.9;
+}
+
+.socialmedia-container{
+    margin-top: 20px;
+    margin-left: 20px;
+    opacity: 0.9;
 }
 
 
