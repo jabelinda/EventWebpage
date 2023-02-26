@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="page">
+    <div class="page" id="start">
 
         <header class="site-header">
             <a class="home-link" href="/">
@@ -32,11 +32,8 @@
         </header>
 
         <main>
-            <div class="container" id="start">
-                {% block content %} {% endblock content %}
-            </div>
-            <div class="container">
-            </div>
+            {% block content %} {% endblock content %}
+
         </main>
 
         <footer id="end">
