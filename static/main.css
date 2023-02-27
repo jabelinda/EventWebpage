@@ -52,7 +52,7 @@ body{
 /*##############################
 ####  HERO  ####
 ###############################*/
-hero{
+.hero{
     position: relative;
 }
 
@@ -96,6 +96,7 @@ main{
     flex-direction: row;
     width: auto;
     padding-right: 100vw;
+    margin-right: 150px;
 }
 
 /*##############################
