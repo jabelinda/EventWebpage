@@ -4,6 +4,10 @@
     font-weight: bolder;
     font-size: xx-large;
     }
+.start{
+    height: 0;
+    width: 0;
+}
 
 html, body{
     overflow-y: hidden;
@@ -30,6 +34,9 @@ body{
     min-width: 200vw;
 }
 
+/*##############################
+####  HEADER  ####
+###############################*/
 .site-header{
     z-index: 4;
     position: fixed;
@@ -42,6 +49,9 @@ body{
     height: 80px;
 }
 
+/*##############################
+####  HERO  ####
+###############################*/
 hero{
     position: relative;
 }
@@ -52,7 +62,6 @@ hero{
     width: 50vw;
     opacity: 0.7;
 }
-
 
 .hero-content{
     display: flex;
@@ -79,11 +88,80 @@ hero{
     height: 170px;
 }
 
+/*##############################
+####  MAIN CONTENT  ####
+###############################*/
 main{
     display: flex;
     flex-direction: row;
     width: auto;
     padding-right: 100vw;
+}
+
+/*##############################
+####  INDEX CATEGORY CARD GRID  ####
+###############################*/
+
+.card-grid{
+    display: flex;
+    position: relative;
+    height: 600px;
+    width: auto;
+    margin-top: 120px;
+}
+
+.event-card{
+    position: relative;
+    height: 520px;
+    width: 400px;
+}
+
+.event-card.first{
+    margin: 0 40px 80px 40px;
+}
+
+.event-card.second{
+    margin: 80px 40px 0 40px;
+}
+
+.card-img{
+    z-index: -2;
+    height: 520px;
+    width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
+}
+
+.event-card-content{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    height: 100%;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    justify-content: flex-end;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+}
+.card-area{
+    font-size: smaller;
+    font-weight: normal;
+}
+
+.event-card-content h3{
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.card-bottom{
+    display: flex;
+    margin-bottom: 40px;
+    margin-left: 20px;
 }
 
 .container{
@@ -93,6 +171,9 @@ main{
     opacity: 0.3;
 }
 
+/*##############################
+####  FOOTER  ####
+###############################*/
 footer{
     display: flex;
     flex-direction: column;
