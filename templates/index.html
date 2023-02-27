@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <hero>
+    <section class= "hero">
         <img src="{{ url_for('static', filename='images/green.png') }}" alt="Green Background" width="80" class="hero-index-img">
 
         <div class="hero-content">
@@ -10,55 +10,31 @@
 
             </div>
         </div>
-    </hero>
+    </section>
 
     <div class="card-grid">
 
-        <div class="event-card first">
-            <img src="{{url_for('static',filename='images/second-hand.png')}}"alt="Secondhand"width="250"class="card-img">
-            <div class="event-card-content">
-                <div class="card-top">
-                    <span class="card-category">Second Hand</span>
-                    <span class="card-area">Gamla Stan</span>
-                </div>
-                <h3 class="">Morsans Loppis</h3>
-                <div class="card-bottom">
-                    <span class="card-date">01.04.2023</span>
-                </div>
-            </div>
-        </div>
+        {% for i in range(events| length) %}
+            {% if i%2==0 %}
+                <div class="event-card first">
+            {% elif i%2!=0 %}
+                <div class="event-card second">
+            {% endif  %}
 
-        <div class="event-card second">
-            <img src="{{url_for('static',filename='images/family.png')}}"alt="Family"width="250"class="card-img">
-            <div class="event-card-content">
-                <div class="card-top">
-                    <span class="card-category">Family</span>
-                    <span class="card-area">Biblioteket</span>
+                    <img src="{{events[i].image}}" alt="{{events[i].category}}" width="250" class="card-img">
+                    <div class="event-card-content">
+                        <div class="card-top">
+                            <span class="card-category">{{events[i].category}}</span>
+                            <span class="card-area">{{events[i].area}}</span>
+                        </div>
+                        <h3 class="">{{events[i].name}}</h3>
+                        <div class="card-bottom">
+                            <span class="card-date">{{events[i].date}}</span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="">Sagostund</h3>
-                <div class="card-bottom">
-                    <span class="card-date">01.04.2023</span>
-                </div>
-            </div>
-        </div>
-        <div class="event-card first">
-            <img src="{{url_for('static',filename='images/music.png')}}"alt="Music"width="250"class="card-img">
-            <div class="event-card-content">
-                <div class="card-top">
-                    <span class="card-category">Concert</span>
-                    <span class="card-area">City Arena</span>
-                </div>
-                <h3 class="">Stor Bandet Spelar</h3>
-                <div class="card-bottom">
-                    <span class="card-date">01.04.2023</span>
-                </div>
-            </div>
-        </div>
-        <div class="event-card second">
-            <img src="{{url_for('static',filename='images/sport.png')}}"alt="Sport"width="250"class="card-img">
-        </div>
+        {% endfor  %}
+
     </div>
-            <div class="container">
-        </div>
 
 {% endblock content %}
