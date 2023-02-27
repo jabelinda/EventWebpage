@@ -16,8 +16,8 @@
 
 </head>
 <body>
-    <div class="page" id="start">
-
+    <div class="page">
+        <div class="start" id="start"></div>
         <header class="site-header">
             <a class="home-link" href="/">
                 <div class="header-logo">
@@ -31,6 +31,7 @@
             </div>
         </header>
 
+
         <main>
             {% block content %} {% endblock content %}
 
@@ -40,7 +41,7 @@
             <img src="{{ url_for('static', filename='images/footer-background.png') }}" alt="Colorful Background" width="80" class="footer-background-img">
 
             <div class="start-anchor">
-               <a class="start-link" href="#start">
+               <a class="start-link" href=#start>
                    <img src="{{ url_for('static', filename='images/footer-start-img.png') }}" alt="To Start" width="80" class="footer-start-img">
                </a>
             </div>
