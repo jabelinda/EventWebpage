@@ -33,5 +33,10 @@ def index():
     return render_template('index.html', title="Home", events=events)
 
 
+@app.route("/detailpage")
+def detailpage():
+    return render_template('event-detail-page.html', title=title, event=event)
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=7000, debug=True)
