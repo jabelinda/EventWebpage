@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
@@ -22,7 +22,12 @@ events = [
      "description": "Final match! Var med att kora årets mästare i året pirrigast final."}
 
 ]
-
+event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23", "tid": "22-01", "price": "100",
+         "adress": "Avenyn 5", "area": "Stora nattklubben",
+         "image": "/static/images/music.png",
+         "description": "Stora Bandet spelar allt från covers till egen musik inom pop, rock, jazz, och "
+                        "dansbandsmusik. Välkommen till en svängig kväll!"}
+]
 
 @app.route("/")
 @app.route("/index")
@@ -31,6 +36,14 @@ def index():
     # img_file = url_for('static', filename='images/whatsup-vertical.png')
     # , img_file=img_file
     return render_template('index.html', title="Home", events=events)
+
+
+@app.route("/detail")
+def detail():
+    #event = int(request.args["event"])
+    #title = events[event]["name"]
+
+    return render_template('event-detail-page.html', title="Detail", event=event)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="detail-background-img">
+  <img src="{{ url_for('static', filename='images/green.png') }}" alt="Colored Background" width="700" class="hero-detail-img">
+  <div class="detail-card">
+    <div class="detail-info">
+      <h3 class="card-name">{{events[i].name}}</h3>
+      <div class="card-area"></div>
+      <div class="card-date-grid">
+        <div class="card-date"></div>
+        <div class="card-date"></div>
+      </div>
+      <div class="card-price"></div>
+    </div>
+    <div class="detail-remember"></div>
+
+  </div>
+</section>
+{% endblock content %}
