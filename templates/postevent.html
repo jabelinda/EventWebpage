@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<section class="hero-register">
-    <img src="{{ url_for('static', filename='images/02square.jpg') }}" alt="Green Background" width="80"
-         class="hero-register-img">
+<section class="hero-sqr-bg">
+    <img src="{{ url_for('static', filename='images/02square.jpg') }}" alt="Colored Background" class="hero-sqr-bg-img">
+    <h1  class="hero-bg-topic sqr">Add A New Event</h1>
 </section>
 <div class="register-page">
-    <h1>Registering nytt Event</h1>
 
     <form class="register-form-wrapper">
         <div class="register-form">
@@ -14,6 +13,7 @@
                 <label for="event-name">Namn på evenemang</label>
                 <input type="text" id="event-name" name="event-name">
             </div>
+
             <div>
                 <label for="category">Kategori</label>
                 <input type="text" id="category" name="category">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="register-form-button">
-                    <button type="submit">Registrera</button>
+                <button type="submit">Submit</button>
             </div>
         </div>
     </form>

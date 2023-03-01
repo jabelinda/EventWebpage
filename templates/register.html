@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<section class="hero-register">
-    <img src="{{ url_for('static', filename='images/06.jpg') }}" alt="Green Background" width="80"
-         class="hero-register-img">
+<section class="hero-sqr-bg">
+    <img src="{{ url_for('static', filename='images/06.jpg') }}" alt="Green Background" class="hero-sqr-bg-img">
+    <h1 class="hero-bg-topic sqr">Sign Up As New Member</h1>
 </section>
 <div class="register-page">
-    <h1>Registering ny medlem</h1>
 
     <form class="register-form-wrapper">
         <div class="register-form">
@@ -38,15 +37,16 @@
 
             <div>
                 <label for="image">Bild:</label>
-                <input type="file" id="image" name="image" accept="image/*">
+                <input class="file-input" type="file" id="image" name="image" accept="image/*">
             </div>
 
             <div>
                 <label for="about">Kort om dig:</label>
                 <textarea id="about" name="about"></textarea>
             </div>
+
             <div class="register-form-button">
-                <button type="submit">Registrera</button>
+                <button type="submit">Submit</button>
             </div>
         </div>
     </form>
