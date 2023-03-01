@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="hero-register">
+    <img src="{{ url_for('static', filename='images/06.jpg') }}" alt="Green Background" width="80"
+         class="hero-register-img">
+</section>
+<div class="register-page">
+    <h1>Registering ny medlem</h1>
+
+    <form class="register-form-wrapper">
+        <div class="register-form">
+
+            <div>
+                <label for="firstname">Namn:</label>
+                <input type="text" id="firstname" name="firstname" required>
+            </div>
+
+            <div>
+                <label for="lastname">Efternamn:</label>
+                <input type="text" id="lastname" name="lastname" required>
+            </div>
+
+            <div>
+                <label for="username">Användarnamn:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+
+            <div>
+                <label for="password">Lösenord:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div>
+                <label for="password-confirm">Repetera Lösenord:</label>
+                <input type="password" id="password-confirm" name="password-confirm" required>
+            </div>
+
+            <div>
+                <label for="image">Bild:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <div>
+                <label for="about">Kort om dig:</label>
+                <textarea id="about" name="about"></textarea>
+            </div>
+            <div class="register-form-button">
+                <button type="submit">Registrera</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}
+
+
+
+
