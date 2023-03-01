@@ -1,19 +1,18 @@
+/*##############################
+####  SITE PAGE  ####
+###############################*/
 *{
     box-sizing: border-box;
     font-family: 'Six Caps', sans-serif;
     font-weight: bolder;
     font-size: xx-large;
     }
-.start{
-    height: 0;
-    width: 0;
-}
 
 html, body{
     overflow-y: hidden;
     height: 100vh;
     width: 100%;
-    margin: 0px;
+    margin: 0;
 }
 
 html{
@@ -34,6 +33,22 @@ body{
     min-width: 200vw;
 }
 
+.start{
+    height: 0;
+    width: 0;
+}
+
+/*##############################
+####  MAIN CONTENT  ####
+###############################*/
+main{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 100vh;
+    padding-right: 115vw;
+}
+
 /*##############################
 ####  HEADER  ####
 ###############################*/
@@ -52,10 +67,13 @@ body{
 /*##############################
 ####  HERO  ####
 ###############################*/
-hero{
+.hero{
     position: relative;
 }
 
+/*##############################
+####  HERO INDEX  ####
+###############################*/
 .hero-index-img{
     z-index: -2;
     height: 100vh;
@@ -89,19 +107,26 @@ hero{
 }
 
 /*##############################
-####  MAIN CONTENT  ####
+####  HERO DETAIL PAGE  ####
 ###############################*/
-main{
+.hero-detail{
     display: flex;
     flex-direction: row;
-    width: auto;
-    padding-right: 100vw;
+    height: 100%;
+}
+
+.hero-detail-img{
+    z-index: -4;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
 }
 
 /*##############################
-####  INDEX CATEGORY CARD GRID  ####
+####  CATEGORY CARD GRID  ####
 ###############################*/
-
 .card-grid{
     display: flex;
     position: relative;
@@ -172,6 +197,97 @@ main{
 }
 
 /*##############################
+####  DETAIL PAGE  ####
+###############################*/
+.main-detail{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: start;
+    height: 100vh;
+    width: 110vw;
+    margin-left: 53vw;
+}
+
+.detail-card{
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    position: -webkit-sticky;
+    left: 0;
+    margin-bottom: 6vh;
+    height: 50vh;
+    width: 40vw;
+    background-color: lightgray;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
+}
+
+.detail-card-info{
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 85%;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    justify-content: flex-end;
+}
+
+.detail-card-info h3{
+    font-size: 2rem;
+    margin: 30px 0;
+}
+
+.card-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.detail-remember{
+    height: 15%;
+}
+
+.detail-about-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: end;
+    justify-content: center;
+    width: 100%;
+    height: 42%;
+}
+
+.detail-about{
+    position: relative;
+    display: flex;
+    max-height: 42vh;
+    width: auto;
+    max-width: 60vw;
+    margin: 2px 0 0 0;
+    background-color: #f2f2f2f2;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
+}
+
+.detail-about p{
+    margin: 0;
+    padding: 7px;
+    font-weight: normal;
+}
+
+.map-container{
+    display: flex;
+    align-items: center;
+    padding: 60px;
+}
+
+.map-img{
+    width: 40vw;
+    height: 550px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
+}
+
+/*##############################
 ####  FOOTER  ####
 ###############################*/
 footer{
@@ -200,7 +316,6 @@ footer, .footer-background-img{
 .start-link{
     position: relative;
     margin: 40px;
-
 }
 
 .footer-start-img{
@@ -217,12 +332,12 @@ footer, .footer-background-img{
     margin-bottom: 100px;
     height: 100%;
 }
+
 .nav-list, .contact-info-list{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
-
 
 .nav-list a{
     text-decoration: none;
@@ -236,7 +351,7 @@ footer, .footer-background-img{
     opacity: 0.9;
 }
 
-p{
+.contact-info-list p{
     margin-block-start: 1%;
     margin-block-end: 1%;
     margin-left: 20px;
