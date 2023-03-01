@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="hero-full-bg">
+    <img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="Colored Background" class="hero-full-bg-img">
+    <h1 class="hero-bg-topic full">All About " "</h1>
+</section>
+
+<div class="card-grid result">
+
+    {% for i in range(events| length) %}
+        {% if i%2==0 %}
+            <div class="event-card first">
+        {% elif i%2!=0 %}
+            <div class="event-card second">
+        {% endif  %}
+
+                <img src="{{events[i].image}}" alt="{{events[i].category}}" width="250" class="card-img">
+                <div class="event-card-content">
+                    <div class="card-top">
+                        <span class="card-category">{{events[i].category}}</span>
+                        <span class="card-area">{{events[i].area}}</span>
+                    </div>
+                    <h3 class="card-name">{{events[i].name}}</h3>
+                    <div class="card-bottom">
+                        <span class="card-date">{{events[i].date}}</span>
+                    </div>
+                </div>
+            </div>
+    {% endfor  %}
+
+</div>
+{% endblock content %}

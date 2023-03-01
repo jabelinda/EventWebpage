@@ -39,17 +39,6 @@ body{
 }
 
 /*##############################
-####  MAIN CONTENT  ####
-###############################*/
-main{
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    height: 100vh;
-    padding-right: 115vw;
-}
-
-/*##############################
 ####  HEADER  ####
 ###############################*/
 .site-header{
@@ -62,6 +51,17 @@ main{
 
 .header-menu, .footer-link{
     height: 80px;
+}
+
+/*##############################
+####  MAIN CONTENT  ####
+###############################*/
+main{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 100vh;
+    padding-right: 115vw;
 }
 
 /*##############################
@@ -107,21 +107,48 @@ main{
 }
 
 /*##############################
-####  HERO DETAIL PAGE  ####
+####  HERO SQUARE BACKGROUND  ####
 ###############################*/
-.hero-detail{
+.hero-sqr-bg{
+    width: 100vw;
+}
+
+.hero-sqr-bg-img{
+    z-index: -4;
+    height: 100vh;
+    width: 90vw;
+}
+
+.hero-bg-topic.sqr{
+  position: absolute;
+}
+
+/*##############################
+####  HERO FULL BACKGROUND  ####
+###############################*/
+.hero-full-bg, .hero-sqr-bg{
     display: flex;
     flex-direction: row;
     height: 100%;
 }
 
-.hero-detail-img{
+.hero-full-bg-img{
     z-index: -4;
     position: fixed;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.7;
+}
+
+.hero-bg-topic.full{
+   position: fixed;
+}
+
+.hero-bg-topic{
+    left: 20vw;
+    height: 12vh;
+    font-size: 2rem;
+    margin: 0;
 }
 
 /*##############################
@@ -133,6 +160,10 @@ main{
     height: 600px;
     width: auto;
     margin-top: 120px;
+}
+
+.result{
+    margin-left: 120px;
 }
 
 .event-card{
@@ -379,191 +410,69 @@ footer, .footer-background-img{
 }
 
 /*##############################
-####  Register-form  ####
+####  REGISTER FORM  ####
 ###############################*/
-
-.hero-register{
-    width: 100vw;
-
-}
-
-
-.hero-register-img{
-    height: 100vh;
-    width: 90vw;
-    z-index: -2;
-}
-
 .register-page {
     position: absolute;
-    left: 150px;
+    left: 8vw;
+    top: 10vh;
     display: flex;
     flex-direction: column;
     width: 60vw;
-}
-
-.register-page h1 {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 2rem;
-    margin-bottom: 0;
-
-}
-
-.register-form-wrapper {
-    display: flex;
-
+    max-height: 85vh;
 }
 
 .register-form {
-    width: 500px;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    background-color: #f2f2f2f2;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 60vw;
+    margin-top: 5vh;
+    padding: 20px;
 }
-
-
 
 .register-form div {
     display: flex;
-
 }
 
 .register-form label {
-    width: 200px;
-
-}
-
-.register-form input {
-    text-align: end;
-}
-
-.register-form {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f2f2f2f2;
-    border-radius: 5px;
-}
-
-.register-form label {
-    display: block;
-    margin-bottom: 5px;
+    width: 30vw;
     font-weight: normal;
 }
 
-.register-form input[type="text"],
-.register-form input[type="password"],
-.register-form textarea {
-    width: 150%;
-    padding: 10px;
-    margin-bottom: 20px;
+.register-form input {
+    font-weight: normal;
+    text-align: start;
+    width: 50vw;
+    padding: 1vh;
+    margin-bottom: 3vh;
     border: 1px solid #000000;
 }
 
-.register-form button[type="submit"] {
-    background-color: black;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-
-}
-
-.register-form input[type="file"] {
-    margin-bottom: 20px;
-}
-
 .register-form textarea {
-    resize: none;
-    height: 100px;
+    resize: horizontal;
+    width: 50vw;
 }
 
-.register-form-button {
-    height: 80px;
-    position: absolute;
-    top: 50%;
-    left: 750px;
-}
-
-/*##############################
-####  Post-Event  ####
-###############################*/
-
-
-.event {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    max-width: 1000px;
-    padding: 20px;
-    border: 1px solid #cccccc;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-}
-
-.event-info {
-    text-align: center;
-}
-
-.event-name {
-    font-size: 6rem;
-    font-family: 'Six Caps', sans-serif;
-    margin: 0;
-}
-
-.event-category,
-.event-date,
-.event-time,
-.event-price,
-.event-address,
-.event-rating,
-.event-details-text {
-    margin: 10px 0;
-    font-size: 1.2rem;
-}
-
-.event-category .category-value,
-.event-date .date-value,
-.event-time .time-value,
-.event-price .price-value,
-.event-address .address-value,
-.event-rating .rating-value,
-.event-details-text .details-value {
-    font-weight: bold;
-}
-
-.btn {
-    display: block;
-    margin: 20px auto 0;
-    font-size: 1.5rem;
-    background-color: #ffffff;
-    border: 2px solid #cccccc;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-}
-
-.btn:hover {
-    transform: rotate(90deg);
-}
-
-.event-image {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #cccccc;
-}
-
-.register-form button[type="submit"] {
+.register-form button{
     background-color: black;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     color: #fff;
-    padding: 10px 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 40vh;
+    left: 65vw;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    transform: rotate(90deg);
 }

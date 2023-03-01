@@ -47,6 +47,11 @@ def detail():
     return render_template('event-detail-page.html', title="Detail", event=event)
 
 
+@app.route("/searchresult")
+def result():
+    return render_template('searchresult.html', title="Search Result", events=events)
+
+
 @app.route("/register")
 def register():
     return render_template('register.html', title="Sign in")
