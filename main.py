@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -12,5 +12,15 @@ def index():
     return render_template('index.html', title="Home")
 
 
+@app.route("/register")
+def register():
+    return render_template('register.html', title="Sign in")
+
+
+@app.route("/postevent")
+def postevent():
+    return render_template('postevent.html', title="Post Event")
+
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=7000, debug=True)
+    app.run(host="0.0.0.0", port=7001, debug=True)
