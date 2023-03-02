@@ -21,12 +21,20 @@
         <header class="site-header">
             <a class="home-link" href="/">
                 <div class="header-logo">
-                    <img src="{{ url_for('static', filename='images/whatsup-vertical.png') }}" alt="Logo" width="80" class="logo"/>
+                    <img src="{{ url_for('static', filename='images/whatsup-vertical.png') }}" alt="Logo" width="80"
+                         class="logo"/>
                 </div>
             </a>
-            <div class="header-menu">
+            <div class="header-btn menu">
                 <a class="footer-link" href="#end">
-                    <img src="{{ url_for('static', filename='images/header-menu-img.png') }}" alt="Menu" width="80" class="menu-img">
+                    <img src="{{ url_for('static', filename='images/header-menu-img.png') }}" alt="Menu" width="80"
+                         class="menu-img">
+                </a>
+            </div>
+            <div class="header-btn search">
+                <a class="search-link" href="#">
+                    <img src="{{ url_for('static', filename='images/search.png') }}" alt="Search" width="80"
+                         class="search-img">
                 </a>
             </div>
         </header>
