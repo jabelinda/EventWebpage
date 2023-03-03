@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="hero-sqr-bg">
+    <img src="{{ url_for('static', filename='images/07.jpg') }}" alt="Background" class="hero-sqr-bg-img">
+    <h1 class="hero-bg-topic sqr">Logga in</h1>
+</section>
+<div class="login-page">
+
+        <form class="login-form-wrapper" method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <div class="login-form">
+                <div>
+                    <label for="username">Användarnamn:</label>
+                    {{ form.username() }}
+                </div>
+                <div>
+                    <label for="password">Lösenord:</label>
+                    {{ form.password() }}
+                </div>
+                <div>
+                    <label for="remember">Kom ihåg mig:</label>
+                    {{ form.remember() }}
+                </div>
+                    <div class="login-form-button">
+                    <button type="submit" name="login">Logga in</button>
+                </div>
+                <div class="login account-text">
+                    <div class="account-text">
+                    Don't have an account yet? <a href="{{ url_for('register') }}">Sign up</a>
+                    </div>
+                </div>
+
+            </div>
+    </form>
+</div>
+{% endblock content %}
+

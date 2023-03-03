@@ -1,7 +1,10 @@
 
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash, redirect
+from form import RegistrationForm, LoginForm
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = '123456'
 
 events = [
     {"name": "Morsans Loppis", "category": "Second Hand", "date": "01.04.2023", "tid": "10-16", "price": "Free",
@@ -52,9 +55,18 @@ def result():
     return render_template('searchresult.html', title="Search Result", events=events)
 
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', title="Sign in")
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        return redirect(url_for('index'))
+    return render_template('register.html', title="Sign in", form=form)
+
+# Log in form route. From register
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template('login.html', title="Login", form=form)
 
 
 @app.route("/postevent")

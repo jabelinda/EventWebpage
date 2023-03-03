@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <section class="hero-sqr-bg">
     <img src="{{ url_for('static', filename='images/06.jpg') }}" alt="Green Background" class="hero-sqr-bg-img">
@@ -6,33 +7,34 @@
 </section>
 <div class="register-page">
 
-    <form class="register-form-wrapper">
+    <form class="register-form-wrapper" method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
         <div class="register-form">
 
             <div>
                 <label for="firstname">Namn:</label>
-                <input type="text" id="firstname" name="firstname" required>
+                {{ form.firstname() }}
             </div>
 
             <div>
                 <label for="lastname">Efternamn:</label>
-                <input type="text" id="lastname" name="lastname" required>
+                {{ form.lastname() }}
             </div>
 
             <div>
                 <label for="username">Användarnamn:</label>
-                <input type="text" id="username" name="username" required>
+                {{ form.username() }}
             </div>
 
 
             <div>
                 <label for="password">Lösenord:</label>
-                <input type="password" id="password" name="password" required>
+                {{ form.password() }}
             </div>
 
             <div>
                 <label for="password-confirm">Repetera Lösenord:</label>
-                <input type="password" id="password-confirm" name="password-confirm" required>
+                {{ form.confirm_password() }}
             </div>
 
             <div>
@@ -40,21 +42,26 @@
                 <input class="file-input" type="file" id="image" name="image" accept="image/*">
             </div>
 
+
             <div>
                 <label for="about">Kort om dig:</label>
-                <textarea id="about" name="about"></textarea>
+                {{ form.about() }}
             </div>
 
             <div class="register-form-button">
-                <button type="submit">Submit</button>
+                <button type="submit" name="register">Submit</button>
             </div>
+
+            <div class="register account-text">
+                <div class="account-text">
+                Already have an account? <a href="{{ url_for('login') }}">Sign In</a>
+                </div>
+            </div>
+
+
         </div>
     </form>
+
 </div>
-
-
 {% endblock content %}
-
-
-
 

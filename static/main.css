@@ -414,7 +414,7 @@ footer, .footer-background-img{
 /*##############################
 ####  REGISTER FORM  ####
 ###############################*/
-.register-page {
+.register-page, .login-page {
     position: absolute;
     left: 8vw;
     top: 10vh;
@@ -424,7 +424,7 @@ footer, .footer-background-img{
     max-height: 85vh;
 }
 
-.register-form {
+.register-form, .login-form {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2f2;
@@ -437,11 +437,11 @@ footer, .footer-background-img{
     padding: 20px;
 }
 
-.register-form div {
+.register-form div, .login-form div{
     display: flex;
 }
 
-.register-form label {
+.register-form label, .login-form label{
     width: 30vw;
     font-weight: normal;
 }
@@ -454,6 +454,7 @@ footer, .footer-background-img{
     padding: 1vh;
     margin-bottom: 2vh;
     border: 1px solid #000000;
+    background-color: white;
 }
 
 .register-form textarea {
@@ -461,7 +462,19 @@ footer, .footer-background-img{
     width: 50vw;
 }
 
-.register-form button{
+.account-text {
+    font-weight: normal;
+}
+
+.account-text a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.register-form button, .login-form button{
     background-color: black;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     color: #fff;
@@ -475,6 +488,10 @@ footer, .footer-background-img{
     left: 65vw;
     padding: 0;
     transition: all 0.3s ease-in-out;
+}
+
+.login-form button{
+    top: 15vh;
 }
 
 button:hover {
