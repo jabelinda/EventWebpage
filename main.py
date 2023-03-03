@@ -1,10 +1,52 @@
-
+from datetime import datetime
 from flask import Flask, render_template, url_for, request, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from form import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '123456'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+# from main import app, db
+# app.app_context().push()
+# db.create_all()
+# db.drop_all()
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), unique=True, nullable=False)
+    category = db.Column(db.String(20), nullable=False, default='Anything')
+    date = db.Column(db.DateTime, nullable=False)
+    price = db.Column(db.Integer, nullable=False, default=0)
+    adress = db.Column(db.String(40), nullable=False)
+    area = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    image = db.Column(db.String(20), nullable=False, default='anything.png')
+    map_image = db.Column(db.String(20), nullable=False, default='map.png')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Event('{self.name}', '{self.category}', '{self.date}', '{self.price}', '{self.adress}'," \
+               f" '{self.area}', '{self.description}', '{self.image}')"
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    lastname = db.Column(db.String(20), nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(40), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    image = db.Column(db.String(20), nullable=False)
+    created_events = db.relationship('Event', backref='author', lazy=True)
+    saved_events = db.relationship('Event', backref='saved', lazy=True)
+
+    def __repr__(self):
+        return f"User('{self.name}', '{self.lastname}', '{self.description}', '{self.image}')"
+
 
 events = [
     {"name": "Morsans Loppis", "category": "Second Hand", "date": "01.04.2023", "tid": "10-16", "price": "Free",
@@ -75,4 +117,4 @@ def postevent():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=7001, debug=True)
+    app.run(host="0.0.0.0", port=7000, debug=True)
