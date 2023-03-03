@@ -1,7 +1,10 @@
 from datetime import datetime
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
 from form import RegistrationForm, LoginForm
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Length, EqualTo
 
 app = Flask(__name__)
 
@@ -17,29 +20,42 @@ db = SQLAlchemy(app)
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), unique=True, nullable=False)
+    name = db.Column(db.String(40), nullable=False)
     category = db.Column(db.String(20), nullable=False, default='Anything')
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String(20), nullable=False)
+    time = db.Column(db.String(40), nullable=False, default='All Day')
     price = db.Column(db.Integer, nullable=False, default=0)
-    adress = db.Column(db.String(40), nullable=False)
+    address = db.Column(db.String(40), nullable=False)
     area = db.Column(db.String(20), nullable=False)
     description = db.Column(db.String(200), nullable=False)
     image = db.Column(db.String(20), nullable=False, default='anything.png')
     map_image = db.Column(db.String(20), nullable=False, default='map.png')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
-        return f"Event('{self.name}', '{self.category}', '{self.date}', '{self.price}', '{self.adress}'," \
+        return f"Event('{self.name}', '{self.category}', '{self.date}', '{self.price}', '{self.address}'," \
                f" '{self.area}', '{self.description}', '{self.image}')"
+
+
+class EventForm(FlaskForm):
+    name = StringField('Namn', validators=[DataRequired(), Length(min=2, max=40)])
+    category = StringField('Category')
+    date = StringField('Date', validators=[DataRequired(), Length(min=2, max=24)])
+    time = StringField('Time', validators=[DataRequired(), Length(min=2, max=40)])
+    price = StringField('Price', validators=[DataRequired(), Length(max=16)])
+    address = StringField('Address', validators=[DataRequired(), Length(min=2, max=40)])
+    area = StringField('Area', validators=[DataRequired(), Length(min=2, max=24)])
+    description = TextAreaField('Describe the Event', validators=[DataRequired(), Length(min=2, max=200)])
+    submit = SubmitField('Submit')
 
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
+    firstname = db.Column(db.String(20), nullable=False)
     lastname = db.Column(db.String(20), nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(40), nullable=False)
-    description = db.Column(db.String(200), nullable=False)
+    about = db.Column(db.String(200), nullable=False)
     image = db.Column(db.String(20), nullable=False)
     created_events = db.relationship('Event', backref='author', lazy=True)
     saved_events = db.relationship('Event', backref='saved', lazy=True)
@@ -48,7 +64,7 @@ class User(db.Model):
         return f"User('{self.name}', '{self.lastname}', '{self.description}', '{self.image}')"
 
 
-events = [
+"""events = [
     {"name": "Morsans Loppis", "category": "Second Hand", "date": "01.04.2023", "tid": "10-16", "price": "Free",
      "adress": "Storgatan 50", "area": "Gamla Stan",
      "image": "/static/images/second-hand.png",
@@ -73,28 +89,26 @@ event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23
          "image": "/static/images/music.png",
          "description": "Stora Bandet spelar allt från covers till egen musik inom pop, rock, jazz, och "
                         "dansbandsmusik. Välkommen till en svängig kväll!"}
-]
+]"""
+
 
 @app.route("/")
 @app.route("/index")
 @app.route("/home")
 def index():
-    # img_file = url_for('static', filename='images/whatsup-vertical.png')
-    # , img_file=img_file
+    events = Event.query.all()
     return render_template('index.html', title="Home", events=events)
 
 
-@app.route("/detail")
+@app.route("/detail", methods=['GET'])
 def detail():
-    #event = int(request.args["event"])
-    #title = events[event]["name"]
-
-    return render_template('event-detail-page.html', title="Detail", event=event)
+    event = int(request.args["event"])
+    return render_template('event-detail-page.html', title="Detail - {{ event.name }}", event=event)
 
 
 @app.route("/searchresult")
 def result():
-    return render_template('searchresult.html', title="Search Result", events=events)
+    return render_template('searchresult.html', title="Search Result")
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -104,6 +118,7 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html', title="Sign in", form=form)
 
+
 # Log in form route. From register
 @app.route("/login")
 def login():
@@ -111,9 +126,39 @@ def login():
     return render_template('login.html', title="Login", form=form)
 
 
-@app.route("/postevent")
-def postevent():
-    return render_template('postevent.html', title="Post Event")
+@app.route("/event/add", methods=['GET', 'POST'])
+def add_event():
+    event = None
+    form = EventForm()
+    if form.validate_on_submit():
+        if event is None:
+            event = Event(
+                name=form.name.data,
+                category=form.category.data,
+                date=form.date.data,
+                time=form.time.data,
+                price=form.price.data,
+                address=form.address.data,
+                area=form.area.data,
+                description=form.description.data
+            )
+            db.session.add(event)
+            db.session.commit()
+
+            form.name.data = '',
+            form.category.data = '',
+            form.date.data = '',
+            form.time.data = '',
+            form.price.data = '',
+            form.address.data = '',
+            form.area.data = '',
+            form.description.data = '',
+            form.image.data = ''
+
+            flash("Your Event was added Successfully!")
+
+            return redirect(url_for('index'))
+    return render_template('postevent.html', title="Add Event", form=form)
 
 
 if __name__ == '__main__':

@@ -20,8 +20,22 @@
             {% elif i%2!=0 %}
                 <div class="event-card second">
             {% endif  %}
-
-                    <img src="{{events[i].image}}" alt="{{events[i].category}}" width="250" class="card-img">
+                    {% if events[i].category == "Second Hand" %}
+                        <img src="{{url_for('static', filename='images/second-hand.png') }}"
+                             alt="Second Hand" width="250" class="card-img">
+                    {% elif events[i].category == "Family" %}
+                        <img src="{{url_for('static', filename='images/family.png') }}"
+                             alt="Family" width="250" class="card-img">
+                    {% elif events[i].category == "Music" %}
+                        <img src="{{url_for('static', filename='images/music.png') }}"
+                             alt="Music" width="250" class="card-img">
+                    {% elif events[i].category == "Sport" %}
+                        <img src="{{url_for('static', filename='images/sport.png') }}"
+                             alt="Sport" width="250" class="card-img">
+                    {% else %}
+                        <img src="{{url_for('static', filename='images/anything.png') }}"
+                             alt="Anything" width="250" class="card-img">
+                    {% endif %}
                     <div class="event-card-content">
                         <div class="card-top">
                             <span class="card-category">{{events[i].category}}</span>

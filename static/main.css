@@ -460,6 +460,7 @@ footer, .footer-background-img{
 .register-form textarea {
     resize: horizontal;
     width: 50vw;
+    font-weight: normal;
 }
 
 .account-text {
