@@ -457,7 +457,7 @@ footer, .footer-background-img{
     background-color: white;
 }
 
-.register-form textarea {
+.register-form textarea, select, #sex, option {
     resize: horizontal;
     width: 50vw;
     font-weight: normal;
@@ -469,9 +469,10 @@ footer, .footer-background-img{
 
 .account-text a {
     margin-left: 20px;
+    font-weight: normal;
     text-decoration: none;
-    color: black;
-    border: 1px solid black;
+    color: white;
+    background-color: black;
     padding: 5px;
 }
 

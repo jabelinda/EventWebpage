@@ -56,12 +56,12 @@ class User(db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(40), nullable=False)
     about = db.Column(db.String(200), nullable=False)
-    image = db.Column(db.String(20), nullable=False)
+    sex = db.Column(db.String(10), nullable=False, default='Female')
     created_events = db.relationship('Event', backref='author', lazy=True)
     saved_events = db.relationship('Event', backref='saved', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.name}', '{self.lastname}', '{self.description}', '{self.image}')"
+        return f"User('{self.firstname}', '{self.lastname}')"
 
 
 """events = [
@@ -113,10 +113,32 @@ def result():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    user = None
     form = RegistrationForm()
     if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None:
+            user = User(
+                firstname=form.firstname.data,
+                lastname=form.lastname.data,
+                username=form.username.data,
+                password=form.password.data,
+                about=form.about.data
+            )
+            db.session.add(user)
+            db.session.commit()
+
+            form.firstname.data = '',
+            form.lastname.data = '',
+            form.username.data = '',
+            form.password.data = '',
+            form.about.data = '',
+            form.sex.data = ''
+
+            flash("Your Profile was added Successfully!")
+
         return redirect(url_for('index'))
-    return render_template('register.html', title="Sign in", form=form)
+    return render_template('register.html', title="Sign Up", form=form)
 
 
 # Log in form route. From register
@@ -152,8 +174,7 @@ def add_event():
             form.price.data = '',
             form.address.data = '',
             form.area.data = '',
-            form.description.data = '',
-            form.image.data = ''
+            form.description.data = ''
 
             flash("Your Event was added Successfully!")
 
