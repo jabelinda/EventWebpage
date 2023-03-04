@@ -4,6 +4,9 @@
         <img src="{{ url_for('static', filename='images/04.jpg') }}" alt="Green Background" width="80" class="hero-index-img">
 
         <div class="hero-content">
+            {% if user %}
+                <h1>Hello {{ user.name }}!</h1>
+            {% endif %}
             <h1>Hello Awesome!</h1>
             <h2>See what's Up in your hometown!</h2>
             <div class="hero-link-container">

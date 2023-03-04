@@ -97,6 +97,17 @@ event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23
 @app.route("/home")
 def index():
     events = Event.query.all()
+    if events is None:
+        events = [{
+            "name": "This is how it can look",
+            "category": "Anything",
+            "date": "01.04.2023",
+            "time": "10-12",
+            "price": "Free",
+            "address": "The Street",
+            "area": "The Area",
+            "description": "This is were you describe your event in detail"}]
+
     return render_template('index.html', title="Home", events=events)
 
 

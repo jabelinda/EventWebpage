@@ -49,7 +49,11 @@ body{
     height: auto;
 }
 
-.header-btn, .footer-link, .search-link{
+.header-btn,
+.footer-link,
+.search-link,
+.login-link,
+.add-new-event-link{
     height: 80px;
 }
 

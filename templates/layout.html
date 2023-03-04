@@ -19,7 +19,7 @@
     <div class="page">
         <div class="start" id="start"></div>
         <header class="site-header">
-            <a class="home-link" href="/">
+            <a class="home-link" href="{{url_for('index')}}">
                 <div class="header-logo">
                     <img src="{{ url_for('static', filename='images/whatsup-vertical.png') }}" alt="Logo" width="80"
                          class="logo"/>
@@ -31,10 +31,16 @@
                          class="menu-img">
                 </a>
             </div>
-            <div class="header-btn search">
-                <a class="search-link" href="#">
-                    <img src="{{ url_for('static', filename='images/search.png') }}" alt="Search" width="80"
-                         class="search-img">
+            <div class="header-btn login">
+                <a class="login-link" href="{{url_for('login')}}">
+                    <img src="{{ url_for('static', filename='images/arrow-in.png') }}" alt="Login" width="80"
+                         class="login-img">
+                </a>
+            </div>
+            <div class="header-btn add-event">
+                <a class="add-new-event-link" href="{{url_for('add_event')}}">
+                    <img src="{{ url_for('static', filename='images/add-new-event.png') }}" alt="Add Event" width="80"
+                         class="add-event-img">
                 </a>
             </div>
         </header>
