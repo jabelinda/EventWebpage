@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
     <section class= "hero">
-        <img src="{{ url_for('static', filename='images/04.jpg') }}" alt="Green Background" width="80" class="hero-index-img">
+        <img src="{{ url_for('static', filename='images/04.jpg') }}" alt="Background" width="80" class="hero-index-img">
 
         <div class="hero-content">
             {% if user %}
                 <h1>Hello {{ user.name }}!</h1>
-            {% endif %}
+            {% else %}
             <h1>Hello Awesome!</h1>
             <h2>See what's Up in your hometown!</h2>
+            {% endif %}
             <div class="hero-link-container">
 
             </div>
@@ -16,42 +17,61 @@
     </section>
 
     <div class="card-grid">
+        {% if events %}
+            {% for i in range(events| length) %}
+                {% if i%2==0 %}
+                    <div class="event-card first">
 
-        {% for i in range(events| length) %}
-            {% if i%2==0 %}
-                <div class="event-card first">
-            {% elif i%2!=0 %}
-                <div class="event-card second">
-            {% endif  %}
-                    {% if events[i].category == "Second Hand" %}
-                        <img src="{{url_for('static', filename='images/second-hand.png') }}"
-                             alt="Second Hand" width="250" class="card-img">
-                    {% elif events[i].category == "Family" %}
-                        <img src="{{url_for('static', filename='images/family.png') }}"
-                             alt="Family" width="250" class="card-img">
-                    {% elif events[i].category == "Music" %}
-                        <img src="{{url_for('static', filename='images/music.png') }}"
-                             alt="Music" width="250" class="card-img">
-                    {% elif events[i].category == "Sport" %}
-                        <img src="{{url_for('static', filename='images/sport.png') }}"
-                             alt="Sport" width="250" class="card-img">
-                    {% else %}
-                        <img src="{{url_for('static', filename='images/anything.png') }}"
-                             alt="Anything" width="250" class="card-img">
-                    {% endif %}
-                    <div class="event-card-content">
-                        <div class="card-top">
-                            <span class="card-category">{{events[i].category}}</span>
-                            <span class="card-area">{{events[i].area}}</span>
-                        </div>
-                        <h3 class="card-name">{{events[i].name}}</h3>
-                        <div class="card-bottom">
-                            <span class="card-date">{{events[i].date}}</span>
+                {% elif i%2!=0 %}
+                    <div class="event-card second">
+                {% endif  %}
+                        {% if events[i].category == "Second Hand" %}
+                            <img src="{{url_for('static', filename='images/second-hand.png') }}"
+                                 alt="Second Hand" width="250" class="card-img">
+                        {% elif events[i].category == "Family" %}
+                            <img src="{{url_for('static', filename='images/family.png') }}"
+                                 alt="Family" width="250" class="card-img">
+                        {% elif events[i].category == "Music" %}
+                            <img src="{{url_for('static', filename='images/music.png') }}"
+                                 alt="Music" width="250" class="card-img">
+                        {% elif events[i].category == "Sport" %}
+                            <img src="{{url_for('static', filename='images/sport.png') }}"
+                                 alt="Sport" width="250" class="card-img">
+                        {% else %}
+                            <img src="{{url_for('static', filename='images/anything.png') }}"
+                                 alt="Anything" width="250" class="card-img">
+                        {% endif %}
+                        <div class="event-card-content">
+                            <div class="card-top">
+                                <span class="card-category">{{events[i].category}}</span>
+                                <span class="card-area">{{events[i].area}}</span>
+                            </div>
+                            <h3 class="card-name">{{events[i].name}}</h3>
+                            <div class="card-bottom">
+                                <span class="card-date">{{events[i].date}}</span>
+                                <a class="detail-link" href="{{url_for('detail')}}">Read More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-        {% endfor  %}
+            {% endfor  %}
 
+        {% else %}
+            <div class="event-card first">
+                <img src="{{url_for('static', filename='images/anything.png') }}"
+                         alt="Anything" width="250" class="card-img">
+                <div class="event-card-content">
+                    <div class="card-top">
+                        <span class="card-category">Anything</span>
+                        <span class="card-area">The Area</span>
+                    </div>
+                    <h3 class="card-name">This is how it can look</h3>
+                    <div class="card-bottom">
+                        <span class="card-date">01.04.2023</span>
+                        <a class="detail-link" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% endif  %}
     </div>
 
 {% endblock content %}

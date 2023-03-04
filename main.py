@@ -1,9 +1,8 @@
-from datetime import datetime
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from form import RegistrationForm, LoginForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 app = Flask(__name__)
@@ -22,7 +21,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
     category = db.Column(db.String(20), nullable=False, default='Anything')
-    date = db.Column(db.String(20), nullable=False)
+    date = db.Column(db.Date, nullable=False)
     time = db.Column(db.String(40), nullable=False, default='All Day')
     price = db.Column(db.Integer, nullable=False, default=0)
     address = db.Column(db.String(40), nullable=False)
@@ -40,7 +39,7 @@ class Event(db.Model):
 class EventForm(FlaskForm):
     name = StringField('Namn', validators=[DataRequired(), Length(min=2, max=40)])
     category = StringField('Category')
-    date = StringField('Date', validators=[DataRequired(), Length(min=2, max=24)])
+    date = DateField('Date', validators=[DateField])
     time = StringField('Time', validators=[DataRequired(), Length(min=2, max=40)])
     price = StringField('Price', validators=[DataRequired(), Length(max=16)])
     address = StringField('Address', validators=[DataRequired(), Length(min=2, max=40)])
@@ -90,23 +89,29 @@ event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23
          "description": "Stora Bandet spelar allt från covers till egen musik inom pop, rock, jazz, och "
                         "dansbandsmusik. Välkommen till en svängig kväll!"}
 ]"""
+"""if events is None:
+    events = [{
+        "name": "This is how it can look",
+        "category": "Anything",
+        "date": "01.04.2023",
+        "time": "10-12",
+        "price": "Free",
+        "address": "The Street",
+        "area": "The Area",
+        "description": "This is were you describe your event in detail"}]"""
 
 
 @app.route("/")
 @app.route("/index")
 @app.route("/home")
 def index():
-    events = Event.query.all()
-    if events is None:
-        events = [{
-            "name": "This is how it can look",
-            "category": "Anything",
-            "date": "01.04.2023",
-            "time": "10-12",
-            "price": "Free",
-            "address": "The Street",
-            "area": "The Area",
-            "description": "This is were you describe your event in detail"}]
+    event1 = Event.query.filter_by(category="Second Hand").first()
+    event2 = Event.query.filter_by(category="Family").first()
+    event3 = Event.query.filter_by(category="Music").first()
+    event4 = Event.query.filter_by(category="Sport").first()
+    event5 = Event.query.filter_by(category="Anything").first()
+
+    events = [event1, event2, event3, event4, event5]
 
     return render_template('index.html', title="Home", events=events)
 
@@ -114,12 +119,15 @@ def index():
 @app.route("/detail", methods=['GET'])
 def detail():
     event = int(request.args["event"])
-    return render_template('event-detail-page.html', title="Detail - {{ event.name }}", event=event)
+    title = event.name
+    return render_template('event-detail-page.html', title=title, event=event)
 
 
-@app.route("/searchresult")
+@app.route("/calendar")
 def result():
-    return render_template('searchresult.html', title="Search Result")
+    events = Event.query.all()
+
+    return render_template('result.html', title="Calendar", events=events)
 
 
 @app.route("/register", methods=['GET', 'POST'])

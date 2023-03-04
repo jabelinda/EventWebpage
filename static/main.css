@@ -222,8 +222,15 @@ main{
 
 .card-bottom{
     display: flex;
+    justify-content: space-between;
+    width: 354px;
     margin-bottom: 40px;
     margin-left: 20px;
+}
+
+.card-bottom a{
+    text-decoration: none;
+    color: black;
 }
 
 .container{
