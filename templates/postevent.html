@@ -6,47 +6,48 @@
 </section>
 <div class="register-page">
 
-    <form class="register-form-wrapper">
+    <form class="register-form-wrapper" method="POST" action="{{ url_for('add_event') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
         <div class="register-form">
 
             <div>
-                <label for="event-name">Namn på evenemang</label>
-                <input type="text" id="event-name" name="event-name">
+                <label for="event-name" id="event-name">Name of the event</label>
+                {{ form.name() }}
             </div>
 
             <div>
-                <label for="category">Kategori</label>
-                <input type="text" id="category" name="category">
+                <label for="category" id="category">Category</label>
+                {{ form.category() }}
             </div>
 
             <div>
-                <label for="date">Datum</label>
-                <input type="date" id="date" name="date">
+                <label for="date" id="date">Date</label>
+                {{ form.date() }}
             </div>
 
             <div>
-                <label for="time">Tid</label>
-                <input type="time" id="time" name="time">
+                <label for="time" id="time">Time</label>
+                {{ form.time() }}
             </div>
 
             <div>
-                <label for="price">Pris</label>
-                <input type="text" id="price" name="price">
+                <label for="price" id="price">Price</label>
+                {{ form.price() }}
             </div>
 
             <div>
-                <label for="address">Adress</label>
-                <input type="text" id="address" name="address">
+                <label for="address" id="address">Address</label>
+                {{ form.address() }}
             </div>
 
             <div>
-                <label for="rating">Omdöme</label>
-                <input type="text" id="rating" name="rating">
+                <label for="area" id="area">Area</label>
+                {{ form.area() }}
             </div>
 
             <div>
-                <label for="details">Detaljtext</label>
-                <textarea id="details" name="details"></textarea>
+                <label for="description" id="description">Describe the event</label>
+                {{ form.description() }}
             </div>
 
             <div class="register-form-button">

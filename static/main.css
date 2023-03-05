@@ -49,7 +49,11 @@ body{
     height: auto;
 }
 
-.header-btn, .footer-link, .search-link{
+.header-btn,
+.footer-link,
+.search-link,
+.login-link,
+.add-new-event-link{
     height: 80px;
 }
 
@@ -218,8 +222,15 @@ main{
 
 .card-bottom{
     display: flex;
+    justify-content: space-between;
+    width: 354px;
     margin-bottom: 40px;
     margin-left: 20px;
+}
+
+.card-bottom a{
+    text-decoration: none;
+    color: black;
 }
 
 .container{
@@ -457,9 +468,10 @@ footer, .footer-background-img{
     background-color: white;
 }
 
-.register-form textarea {
+.register-form textarea, select, #sex, option {
     resize: horizontal;
     width: 50vw;
+    font-weight: normal;
 }
 
 .account-text {
@@ -468,9 +480,10 @@ footer, .footer-background-img{
 
 .account-text a {
     margin-left: 20px;
+    font-weight: normal;
     text-decoration: none;
-    color: black;
-    border: 1px solid black;
+    color: white;
+    background-color: black;
     padding: 5px;
 }
 

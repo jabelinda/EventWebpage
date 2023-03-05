@@ -12,40 +12,39 @@
         <div class="register-form">
 
             <div>
-                <label for="firstname">Namn:</label>
+                <label for="firstname" id="firstname">Name</label>
                 {{ form.firstname() }}
             </div>
 
             <div>
-                <label for="lastname">Efternamn:</label>
+                <label for="lastname" id="lastname">Lastname</label>
                 {{ form.lastname() }}
             </div>
 
             <div>
-                <label for="username">Användarnamn:</label>
+                <label for="username" id="username">Username</label>
                 {{ form.username() }}
             </div>
 
 
             <div>
-                <label for="password">Lösenord:</label>
+                <label for="password" id="password">Password</label>
                 {{ form.password() }}
             </div>
 
             <div>
-                <label for="password-confirm">Repetera Lösenord:</label>
+                <label for="password-confirm" id="password-confirm">Confirm Password</label>
                 {{ form.confirm_password() }}
             </div>
 
             <div>
-                <label for="image">Bild:</label>
-                <input class="file-input" type="file" id="image" name="image" accept="image/*">
+                <label for="about" id="about">Describe Your Self</label>
+                {{ form.about() }}
             </div>
 
-
             <div>
-                <label for="about">Kort om dig:</label>
-                {{ form.about() }}
+                <label for="sex" id="sex">Female or Male</label>
+                {{ form.sex() }}
             </div>
 
             <div class="register-form-button">
