@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-
 {% block content %}
+
 <section class="hero-sqr-bg">
     <img src="{{ url_for('static', filename='images/06.jpg') }}" alt="Green Background" class="hero-sqr-bg-img">
     <h1 class="hero-bg-topic sqr">Sign Up As New Member</h1>
@@ -10,7 +10,6 @@
     <form class="register-form-wrapper" method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="register-form">
-
             <div>
                 <label for="firstname" id="firstname">Name</label>
                 {{ form.firstname() }}
