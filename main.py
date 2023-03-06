@@ -1,9 +1,10 @@
 import os.path
 
 import wtforms
-from flask import Flask, render_template, url_for, request, flash, redirect
+from flask import Flask, render_template, url_for, request, flash, redirect, get_flashed_messages
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
+
 from form import RegistrationForm, LoginForm
 from wtforms import StringField, SubmitField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo
@@ -11,6 +12,7 @@ from wtforms.validators import DataRequired, Length, EqualTo
 
 
 app = Flask(__name__)
+global current_user
 #app.config['INSTANCE_PATH'] = '/tmp'
 app.config['SECRET_KEY'] = '123456'
 file_abs_path = os.path.abspath(os.path.dirname(__file__))
@@ -25,7 +27,6 @@ db = SQLAlchemy(app)
 # app.app_context().push()
 # db.create_all()
 # db.drop_all()
-
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,8 +73,24 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.firstname}', '{self.lastname}')"
 
-# Create 5 dummy events (of each category: Second Hand, Family, Sport, Music, Anything else)
-# if database doesn't contain any for each category of events
+class Current_User:
+    def __init__(self):
+        self.User = User()
+        self.logged_in = False
+
+    def login(self, username, password):
+        # get user from db
+
+        if user := User.query.filter_by(username=username).first():
+            self.User = user
+            self.logged_in = True
+            return True
+
+        return False
+
+    def logout(self):
+        self.User = User()
+        self.logged_in = False
 
 
 """events = [
@@ -119,8 +136,7 @@ event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23
 @app.route("/home")
 def index():
     events = Event.query.all()
-
-    return render_template('index.html', title="Home", events=events)
+    return render_template('index.html', title="Home", events=events, user=current_user.User if current_user.logged_in else None)
 
 
 @app.route("/detail", methods=['GET'])
@@ -134,8 +150,23 @@ def detail():
 @app.route("/calendar")
 def result():
     events = Event.query.all()
+    # Query the database for the most common event category using flask-sqlalchemy
+    about = Event.query.with_entities(Event.category).group_by(Event.category).order_by(db.func.count(Event.category).desc()).first()
+    about = f"'{about[0]}'"
 
-    return render_template('result.html', title="Calendar", events=events)
+    for event in events:
+        if event.category == "Second Hand":
+            event.image = "/static/images/second-hand.png"
+        elif event.category == "Family":
+            event.image = "/static/images/family.png"
+        elif event.category == "Music":
+            event.image = "/static/images/music.png"
+        elif event.category == "Sport":
+            event.image = "/static/images/sport.png"
+        else:
+            event.image = "/static/images/anything.png"
+
+    return render_template('result.html', title="Calendar", events=events, about=about)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -154,6 +185,7 @@ def register():
             )
             db.session.add(user)
             db.session.commit()
+            current_user.login(form.username.data, form.password.data)
 
             form.firstname.data = '',
             form.lastname.data = '',
@@ -162,25 +194,69 @@ def register():
             form.about.data = '',
             form.sex.data = ''
 
-            flash("Your Profile was added Successfully!")
+            flash("Din profil har lagts till!", "success")
 
         return redirect(url_for('index'))
     return render_template('register.html', title="Sign Up", form=form)
 
 
 # Log in form route. From register
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    user = None
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None:
+
+        if current_user.login(form.username.data, form.password.data):
+            flash("Du är nu inloggad", "success")
+            return redirect(url_for('index'))
+        else:
             # Flash login fail message
-            flash("Login Failed")
+            flash("Inloggning misslyckat", "failed")
+            return redirect(url_for('login'))
 
     return render_template('login.html', title="Login", form=form)
+
+@app.route("/my-profile")
+def my_profile():
+    # Checks if user is in database
+    if not current_user.logged_in:
+        flash("Du är inte inloggad", "failed")
+        return redirect(url_for('login'))
+
+    return render_template('my-profile.html', title="My Profile", user=current_user.User)
+
+@app.route("/categories")
+def categories():
+    # Get all events with no duplicate categories from the database
+    events = Event.query.with_entities(Event.category).group_by(Event.category).all()
+    about = Event.query.with_entities(Event.category).group_by(Event.category).order_by(db.func.count(Event.category).desc()).first()
+
+    # Fix settattr error
+    events = [Event(category=event[0]) for event in events]
+
+    for event in events:
+        event.name = ""
+        event.date = ""
+        event.time = ""
+        event.price = ""
+        event.address = ""
+        event.area = ""
+        event.description = ""
+
+        if event.category == "Second Hand":
+            event.image = "/static/images/second-hand.png"
+        elif event.category == "Family":
+            event.image = "/static/images/family.png"
+        elif event.category == "Music":
+            event.image = "/static/images/music.png"
+        elif event.category == "Sport":
+            event.image = "/static/images/sport.png"
+        else:
+            event.image = "/static/images/anything.png"
+
+    return render_template('result.html', title="Categories", events=events, about=about)
 
 
 @app.route("/event/add", methods=['GET', 'POST'])
@@ -211,13 +287,13 @@ def add_event():
             form.area.data = '',
             form.description.data = ''
 
-            flash("Your Event was added Successfully!")
-
+            flash("Inlägget av ditt event lyckades!", "success")
             return redirect(url_for('index'))
     return render_template('postevent.html', title="Add Event", form=form)
 
 
 if __name__ == '__main__':
+    current_user = Current_User()
     app.run(host="0.0.0.0", port=80, debug=True)
 
 

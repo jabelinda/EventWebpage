@@ -9,31 +9,27 @@
 <div class="main-detail">
   <div class="detail-about-wrapper">
     <div class="detail-about">
-      <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
-        ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.</p>
+      <p> {{ event.description }}</p>
     </div>
   </div>
 
 
   <div class="detail-card">
     <div class="detail-card-info">
-      <h3 class="card-name">name</h3>
-      <div class="card-area">area</div>
+      <h3 class="card-name">{{ event.name }}</h3>
+      <div class="card-area">{{ event.area }}</div>
       <div class="card-date">
-        <div class="card-date-date">date</div>
-        <div class="card-date-time">time</div>
+        <div class="card-date-date">{{ event.date }}</div>
+        <div class="card-date-time">{{ event.time }}</div>
       </div>
-      <div class="card-price">price</div>
+      <div class="card-price">{{ event.price }}</div>
     </div>
     <div class="detail-remember"></div>
   </div>
 </div>
 
 <div class="map-container">
-  <img src="{{ url_for('static', filename='images/map.png') }}" alt="Marker on Abstract Map" width="700"
+  <img src="{{ url_for('static', filename='images/'+event.map_image) }}" alt="Marker on Abstract Map" width="700"
        class="map-img">
 </div>
 

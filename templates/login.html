@@ -9,6 +9,17 @@
 
         <form class="login-form-wrapper" method="POST" action="{{ url_for('login') }}">
             {{ form.hidden_tag() }}
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+            <div class="flash-messages" >
+                {% for message in messages %}
+                <div class="flash-message flash-{{ message[0] }}">
+                    {{ message[1] }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
             <div class="login-form">
                 <div>
                     <label for="username">Användarnamn:</label>

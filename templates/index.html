@@ -2,14 +2,25 @@
 {% block content %}
     <section class= "hero">
         <img src="{{ url_for('static', filename='images/04.jpg') }}" alt="Background" width="80" class="hero-index-img">
-
         <div class="hero-content">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+            <div class="flash-messages" >
+                {% for message in messages %}
+                <div class="flash-message flash-{{ message[0] }}">
+                    {{ message[1] }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
             {% if user %}
-                <h1>Hello {{ user.name }}!</h1>
+                <h1>Hello {{ user.username }}!</h1>
             {% else %}
             <h1>Hello Awesome!</h1>
-            <h2>See what's Up in your hometown!</h2>
             {% endif %}
+            <h2>See what's Up in your hometown!</h2>
             <div class="hero-link-container">
 
             </div>

@@ -2,7 +2,7 @@ services:
   web:
     build:
       dockerfile: Dockerfile
-    image: docker.io/antonyemo/flaskblog
+    image: docker.io/salladen/flaskblog
     environment:
       FLASK_DEBUG: true
     ports:
