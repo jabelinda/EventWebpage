@@ -1,14 +1,24 @@
+import os.path
+
+import wtforms
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from form import RegistrationForm, LoginForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField
+from wtforms import StringField, SubmitField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo
 
-app = Flask(__name__)
 
+
+app = Flask(__name__)
+#app.config['INSTANCE_PATH'] = '/tmp'
 app.config['SECRET_KEY'] = '123456'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+file_abs_path = os.path.abspath(os.path.dirname(__file__))
+# if instance folder exists, use it
+if os.path.exists(os.path.join(file_abs_path, 'instance')):
+    file_abs_path = os.path.join(file_abs_path, 'instance')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(file_abs_path, 'site.db')}"
 db = SQLAlchemy(app)
 
 # from main import app, db
@@ -39,7 +49,7 @@ class Event(db.Model):
 class EventForm(FlaskForm):
     name = StringField('Namn', validators=[DataRequired(), Length(min=2, max=40)])
     category = StringField('Category')
-    date = DateField('Date', validators=[DateField])
+    date = DateField('Date', validators=[DataRequired()])
     time = StringField('Time', validators=[DataRequired(), Length(min=2, max=40)])
     price = StringField('Price', validators=[DataRequired(), Length(max=16)])
     address = StringField('Address', validators=[DataRequired(), Length(min=2, max=40)])
@@ -61,6 +71,9 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.firstname}', '{self.lastname}')"
+
+# Create 5 dummy events (of each category: Second Hand, Family, Sport, Music, Anything else)
+# if database doesn't contain any for each category of events
 
 
 """events = [
@@ -105,22 +118,17 @@ event = [{"name": "Stor Bandet Spelar", "category": "Concert", "date": "27.03.23
 @app.route("/index")
 @app.route("/home")
 def index():
-    event1 = Event.query.filter_by(category="Second Hand").first()
-    event2 = Event.query.filter_by(category="Family").first()
-    event3 = Event.query.filter_by(category="Music").first()
-    event4 = Event.query.filter_by(category="Sport").first()
-    event5 = Event.query.filter_by(category="Anything").first()
-
-    events = [event1, event2, event3, event4, event5]
+    events = Event.query.all()
 
     return render_template('index.html', title="Home", events=events)
 
 
 @app.route("/detail", methods=['GET'])
 def detail():
-    event = int(request.args["event"])
-    title = event.name
-    return render_template('event-detail-page.html', title=title, event=event)
+    event_id = request.args.get("event")
+    event = Event.query.filter_by(id=event_id).first()
+
+    return render_template('event-detail-page.html', title=event.name, event=event)
 
 
 @app.route("/calendar")
@@ -163,7 +171,15 @@ def register():
 # Log in form route. From register
 @app.route("/login")
 def login():
+    user = None
     form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None:
+            # Flash login fail message
+            flash("Login Failed")
+
     return render_template('login.html', title="Login", form=form)
 
 
@@ -202,4 +218,6 @@ def add_event():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=7000, debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)
+
+

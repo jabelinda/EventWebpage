@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    image: docker.io/antonyemo/flaskblog
+    environment:
+      FLASK_DEBUG: true
+    ports:
+      - 80:80

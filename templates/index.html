@@ -49,7 +49,7 @@
                             <h3 class="card-name">{{events[i].name}}</h3>
                             <div class="card-bottom">
                                 <span class="card-date">{{events[i].date}}</span>
-                                <a class="detail-link" href="{{url_for('detail')}}">Read More</a>
+                                <a class="detail-link" href="{{url_for('detail')}}?event={{events[i].id}}">Read More</a>
                             </div>
                         </div>
                     </div>
